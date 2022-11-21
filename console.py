@@ -10,7 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+from datetime import datetime
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -49,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:  # parse line left to right
             pline = line[:]  # parsed line
+            print("inside print command ")
 
             # isolate <class name>
             _cls = pline[:pline.find('.')]
@@ -115,13 +116,35 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        print("create method ", args)
+        params = args.split(" ")
+        print("params", params)
+        p_dict= {}
+        if len(params)>1:
+            for param in params:
+                try:
+                    key = param.split("=")[0]
+                    value = param.split("=")[1]
+#                    value = value[1]
+                    print("key= " ,key,"value= " ,value)
+                    p_dict.update({key: value})
+                except:
+                    pass
+
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif params[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        if len(params)>1:
+            p_dict["updated_at"]=datetime.now()
+            p_dict["updated_at"]=p_dict["updated_at"].isoformat()
+            p_dict["created_at"]=datetime.now()
+            p_dict["created_at"]=p_dict["created_at"].isoformat()
+            new_instance = HBNBCommand.classes[params[0]](**p_dict)
+        else :
+            new_instance = HBNBCommand.classes[params[0]]()
         storage.save()
         print(new_instance.id)
         storage.save()
