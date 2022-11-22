@@ -131,16 +131,19 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[_cls]()
 
         if not params:
+            """If only create _cls sent through in console without
+            key=value
+            """
             new_instance.save()
             print(new_instance.id)
             storage.save()
             return
 
-        param_dict = {}
         for param in params:
             key = param.split('=')[0]
             value = param.split('=')[1]
             if value[0] == '"' and value[-1] == '"':
+                '''Remove outside \" and replace _ with SPC char for JSON formatting.'''
                 value = value.strip('"').replace('_', " ")
                 setattr(new_instance, key, value)
             elif '.' in value:
