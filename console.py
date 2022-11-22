@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ 
+        """
         Create an object of any class
         (hbnb) cls_name key=value key=value....
         """
