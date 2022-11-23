@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
-import models.engine.file_storage
+from engine.file_storage import FileStorage
 
 
 class State(BaseModel, Base):
@@ -27,7 +27,7 @@ class State(BaseModel, Base):
         a foreign key reference.
         '''
         city_list = []
-        fs = file_storage.FileStorage()
+        fs = FileStorage()
         '''
         Use the method from filestorage to return list of cities.
         Currently no way toi truncate list, will just be dict that is 
