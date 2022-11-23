@@ -44,12 +44,23 @@ class DBStorage():
         '''
         obj_dict = {}
         class_dict = {
-            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'User': User, 'Place': Place,
             'State': State, 'City': City, 'Amenity': Amenity,
             'Review': Review
         }
+        delete = []
         print(cls)
         if cls is not None:
+            for k, v in class_dict.items():
+                print(k)
+                if k != cls:
+                    delete.append(k)
+
+            for k in delete:
+                del class_dict[k]
+        print(class_dict)
+        for cls in class_dict:
+            print("inside dict", cls)
             query = self.__session.query(class_dict[cls]).all()
             for row in query:
                 id = row.id
@@ -80,4 +91,4 @@ class DBStorage():
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
                                expire_on_commit=False))
-        self.__session = Session()
+        self.__session = Session
