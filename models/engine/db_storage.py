@@ -45,24 +45,19 @@ class DBStorage():
         '''
         obj_dict = {}
         class_dict = {
-            'User': User, 'Place': Place,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Review': Review
+            'State': State
         }
         delete = []
-        print(cls)
-
+        '''Add classes that aren't == cls and delete from class_dict'''
         if cls is not None:
             for k, v in class_dict.items():
-                print(k)
                 if k != cls:
                     delete.append(k)
 
             for k in delete:
                 del class_dict[k]
-        print(class_dict)
+
         for cls in class_dict:
-            print("inside dict", cls)
             query = self.__session.query(class_dict[cls]).all()
             for row in query:
                 id = row.id
