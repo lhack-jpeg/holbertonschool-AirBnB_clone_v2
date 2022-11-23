@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         Create an object of any class
         (hbnb) cls_name key=value key=value....
         """
+        print('Inside create')
         params = args.split(" ")
         _cls = params[0]
         params = params[1:]
@@ -157,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
                 except Exception:
                     pass
 
-        storage.save()
+        new_instance.save()
         print(new_instance.id)
         storage.save()
 
@@ -241,7 +242,7 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage.all().items():
+            for k, v in storage.all(args).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
