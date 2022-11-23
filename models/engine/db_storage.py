@@ -31,7 +31,8 @@ class DBStorage():
             pool_pre_ping=True
         )
 
-        if getenv('HBNB_ENV') == 'test':  # Drop all tables is test_user for QOL.
+        # Drop all tables is test_user for QOL.
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -79,5 +80,5 @@ class DBStorage():
 
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
-                               expire_on_commit=False))
+                                              expire_on_commit=False))
         self.__session = Session()
