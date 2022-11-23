@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
+from models.review import Review
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
+import models.engine.file_storage
 
 
 class Place(BaseModel, Base):
@@ -25,3 +27,19 @@ class Place(BaseModel, Base):
         backref='place',
         cascade='all, delete'
     )
+
+    @property
+    def reviews(self):
+        '''
+        In filestorage mode, this will return a list of dictionaries.
+        Where the place_id in review will be equal to place.id in the
+        place obj.
+        '''
+        review_list = []
+        fs = file_storage.File_storage()
+
+        review_dict = fs.all(Review.__class__.__name__)
+        for review in review_dict:
+            if review.get('place.id') == self.id:
+                review_list.append(review)
+        return review_list
