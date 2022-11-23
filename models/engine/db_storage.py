@@ -31,7 +31,8 @@ class DBStorage():
             pool_pre_ping=True
         )
 
-        if getenv('HBNB_ENV') == 'test':  # Drop all tables is test_user for QOL.
+        # Drop all tables is test_user for QOL.
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -50,6 +51,7 @@ class DBStorage():
         }
         delete = []
         print(cls)
+
         if cls is not None:
             for k, v in class_dict.items():
                 print(k)
@@ -65,8 +67,8 @@ class DBStorage():
             for row in query:
                 id = row.id
                 key = f'{row.__class__.__name__}.{id}'
+                delattr(row, '_sa_instance_state')
                 obj_dict[key] = row
-
         return obj_dict
 
     def new(self, obj):
@@ -90,5 +92,5 @@ class DBStorage():
 
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
-                               expire_on_commit=False))
-        self.__session = Session
+                                              expire_on_commit=False))
+        self.__session = Session()
