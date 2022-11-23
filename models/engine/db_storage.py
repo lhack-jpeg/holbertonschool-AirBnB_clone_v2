@@ -49,13 +49,14 @@ class DBStorage():
             'Review': Review
         }
         print(cls)
+
         if cls is not None:
             query = self.__session.query(class_dict[cls]).all()
             for row in query:
                 id = row.id
                 key = f'{row.__class__.__name__}.{id}'
+                delattr(row, '_sa_instance_state')
                 obj_dict[key] = row
-
         return obj_dict
 
     def new(self, obj):
