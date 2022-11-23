@@ -27,7 +27,7 @@ class DBStorage():
         sql_host = getenv('HBNB_MYSQL_HOST')
         sql_db = getenv('HBNB_MYSQL_DB')
         self.__engine = create_engine(
-            f"{dialect}+{driver}://{sql_user}:{sql_pass}@{sql_host}/{sql_db}",
+            f"mysql+mysqldb://{sql_user}:{sql_pass}@{sql_host}/{sql_db}",
             pool_pre_ping=True
         )
 
@@ -54,11 +54,11 @@ class DBStorage():
                 print('row__DICT: ', row.__dict__)
 
     def new(self, obj):
-        '''Add the object to the current sesison.'''
         self.reload()
+        '''Add the object to the current sesison.'''
         with self.__session.begin():
             self.__session.add(obj)
-            self.save()  # Will automatically close session when finished
+            self.__session.commit()  # Will automatically close session when finished
 
     def save(self):
         self.__session.commit()
