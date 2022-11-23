@@ -45,7 +45,7 @@ class DBStorage():
         '''
         obj_dict = {}
         class_dict = {
-            'State': State, 'City': City
+            'State': State, 'City': City, 'User': User
         }
         delete = []
         '''Add classes that aren't == cls and delete from class_dict'''
