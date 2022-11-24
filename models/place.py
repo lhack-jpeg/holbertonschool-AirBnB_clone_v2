@@ -2,20 +2,19 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.review import Review
-from models.amenity import Amenity
+import models.amenity
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models.engine.file_storage
 
-metadata = Base.metadata()
 
 place_amenity = Table(
     'place_amenity',
-    metadata,
+    Base.metadata,
     Column('place_id', String(60),
            ForeignKey('places.id'), nullable=False),
     Column('amenity_id', String(60), ForeignKey(
-        'amenities.id'), primary_key=True)
+        'amenities.id'), primary_key=True, nullable=False),
 )
 
 
@@ -42,6 +41,7 @@ class Place(BaseModel, Base):
     amenities = relationship(
         'Amenity',
         secondary=place_amenity,
+        back_populates='place_amenities',
         viewonly=False
     )
 
@@ -71,7 +71,7 @@ class Place(BaseModel, Base):
         amenity_list = []
         fs = file_storage.File_storage()
 
-        amenity_dict = fs.all(Amenity.__class__.__name__)
+        amenity_dict = fs.all(amenity.Amenity.__class__.__name__)
         for amenity in amenity_dict:
             if amenity.get('amenity.id') == self.amenity_id:
                 amenity_list.append(amenity)
@@ -80,4 +80,6 @@ class Place(BaseModel, Base):
     @amenity.setter
     def amenity(self, amenity):
         if amenity.__class__.__name__ == 'Amenity':
-            setattr(self, amenity.id)
+            self.amenity_id.append(amenity.id)
+        else:
+            pass
