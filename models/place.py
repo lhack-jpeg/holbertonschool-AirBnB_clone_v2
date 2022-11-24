@@ -55,7 +55,7 @@ class Place(BaseModel, Base):
             '''
 
             review_list = []
-            fs = file_storage.File_storage()
+            fs = file_storage.FileStorage()
 
             review_dict = fs.all(Review.__class__.__name__)
             for review in review_dict:
@@ -64,14 +64,14 @@ class Place(BaseModel, Base):
             return review_list
 
         @property
-        def amenity(self):
+        def amenities(self):
             '''
                     In filestorage mode will return a list of dictionaries where
                     instances contain contain amenity id linked to the place object.
                     place.amenity_id == amenity.id
                 '''
             amenity_list = []
-            fs = file_storage.File_storage()
+            fs = file_storage.FileStorage()
 
             amenity_dict = fs.all(amenity.Amenity.__class__.__name__)
             for amenity in amenity_dict:
@@ -79,8 +79,8 @@ class Place(BaseModel, Base):
                     amenity_list.append(amenity)
             return amenity_list
 
-        @amenity.setter
-        def amenity(self, amenity):
+        @amenities.setter
+        def amenities(self, amenity):
             if amenity.__class__.__name__ == 'Amenity':
                 self.amenity_id.append(amenity.id)
             else:
