@@ -143,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
             key = param.split('=')[0]
             value = param.split('=')[1]
             if value[0] == '"' and value[-1] == '"':
-                '''Remove outside \" and replace _ with SPC char for JSON formatting.'''
+                '''Rmv outside \" & rplace _ wth space forJSON format'''
                 value = value.strip('"').replace('_', " ")
                 setattr(new_instance, key, value)
             elif '.' in value:

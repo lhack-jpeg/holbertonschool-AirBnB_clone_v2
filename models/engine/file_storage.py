@@ -25,7 +25,7 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         cls_dict = {}
         if cls is not None:
-            '''Check to see if cls exists in filestorage and add to dictionary.'''
+            '''Check to see if cls exists in filestorage & add to dict.'''
             for k, v in self.__objects.items():
                 if cls == v.__class__.__name__ or v.__class__:
                     cls_dict[k] = v

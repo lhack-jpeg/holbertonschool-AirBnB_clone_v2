@@ -30,7 +30,7 @@ class State(BaseModel, Base):
         fs = file_storage.FileStorage()
         '''
         Use the method from filestorage to return list of cities.
-        Currently no way toi truncate list, will just be dict that is 
+        Currently no way toi truncate list, will just be dict that is
         filtered through.
         '''
         city_dict = fs.all(City.__class__.__name__)

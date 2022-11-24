@@ -38,7 +38,7 @@ class DBStorage():
     def all(self, cls=None):
         '''
         Queries the Database, depending on the object passed through.
-        if cls=None, queries all types of objects and returns as dict similar to
+        if cls=None, queries all types of objects & returns as dict similar to
         Filestorage.
         key = <class-name>.<object-id>
         value = obj.
