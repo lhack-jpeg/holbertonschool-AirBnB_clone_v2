@@ -48,11 +48,11 @@ class Place(BaseModel, Base):
     else:
         @property
         def reviews(self):
-        '''
-        In filestorage mode, this will return a list of dictionaries.
-        Where the place_id in review will be equal to place.id in the
-        place obj.
-        '''
+            '''
+            In filestorage mode, this will return a list of dictionaries.
+            Where the place_id in review will be equal to place.id in the
+            place obj.
+            '''
 
             review_list = []
             fs = file_storage.FileStorage()
