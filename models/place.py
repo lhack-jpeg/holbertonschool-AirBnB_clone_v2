@@ -2,9 +2,21 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.review import Review
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from models.amenity import Amenity
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models.engine.file_storage
+
+metadata = Base.metadata()
+
+place_amenity = Table(
+    'place_amenity',
+    metadata,
+    Column('place_id', String(60),
+           ForeignKey('places.id'), nullable=False),
+    Column('amenity_id', String(60), ForeignKey(
+        'amenities.id'), primary_key=True)
+)
 
 
 class Place(BaseModel, Base):
@@ -27,6 +39,11 @@ class Place(BaseModel, Base):
         backref='place',
         cascade='all, delete'
     )
+    amenities = relationship(
+        'Amenity',
+        secondary=place_amenity,
+        viewonly=False
+    )
 
     @property
     def reviews(self):
@@ -43,3 +60,24 @@ class Place(BaseModel, Base):
             if review.get('place.id') == self.id:
                 review_list.append(review)
         return review_list
+
+    @property
+    def amenity(self):
+        '''
+        In filestorage mode will return a list of dictionaries where
+        instances contain contain amenity id linked to the place object.
+        place.amenity_id == amenity.id
+        '''
+        amenity_list = []
+        fs = file_storage.File_storage()
+
+        amenity_dict = fs.all(Amenity.__class__.__name__)
+        for amenity in amenity_dict:
+            if amenity.get('amenity.id') == self.amenity_id:
+                amenity_list.append(amenity)
+        return amenity_list
+
+    @amenity.setter
+    def amenity(self, amenity):
+        if amenity.__class__.__name__ == 'Amenity':
+            setattr(self, amenity.id)
