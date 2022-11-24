@@ -9,6 +9,9 @@ import os
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                     "Cannot storage if db is active")
+
     def setUp(self):
         """ Set up test environment """
         del_list = []
