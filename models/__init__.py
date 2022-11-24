@@ -17,6 +17,5 @@ if storage_method == 'db':
     storage = DBStorage()
     storage.reload()
 else:
-    print('Filestorage')
     storage = FileStorage()
     storage.reload()
