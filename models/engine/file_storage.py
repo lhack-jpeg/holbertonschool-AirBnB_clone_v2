@@ -30,8 +30,9 @@ class FileStorage:
                 if cls == v.__class__.__name__ or v.__class__:
                     cls_dict[k] = v
             return cls_dict
-        return FileStorage.__objects
-
+        else:
+            return self.__objects
+    
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
@@ -60,5 +61,5 @@ class FileStorage:
         '''Delete an object if it exists in Filestroage'''
         if obj is not None:
             obj_name = obj.__class__.__name__ + '.' + obj.id
-            if obj_name in self.__objects:
+            if obj_name in FileStorage.__objects:
                 del self.__objects[obj_name]

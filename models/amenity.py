@@ -9,8 +9,8 @@ from os import getenv
 
 class Amenity(BaseModel, Base):
     '''Constructor for amenity object in SQL ORM.'''
+    __tablename__ = 'amenities'
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-        __tablename__ = 'amenities'
         name = Column(String(128), nullable=False)
         place_amenities = relationship('Place',
                                        secondary=place_amenity,
