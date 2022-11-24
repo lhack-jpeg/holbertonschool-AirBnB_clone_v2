@@ -63,5 +63,3 @@ class FileStorage:
             obj_name = obj.__class__.__name__ + '.' + obj.id
             if obj_name in FileStorage.__objects:
                 del self.__objects[obj_name]
-        else:
-            pass
