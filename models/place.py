@@ -2,10 +2,9 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.review import Review
-import models.amenity
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
-import models.engine.file_storage
+import models
 from os import getenv
 
 place_amenity = Table(
@@ -55,9 +54,8 @@ class Place(BaseModel, Base):
             '''
 
             review_list = []
-            fs = file_storage.FileStorage()
 
-            review_dict = fs.all(Review.__class__.__name__)
+            review_dict = models.storage.all(Review.__class__.__name__)
             for review in review_dict:
                 if review.get('place.id') == self.id:
                     review_list.append(review)
@@ -66,21 +64,24 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             '''
-                    In filestorage mode will return a list of dictionaries where
-                    instances contain contain amenity id linked to the place object.
-                    place.amenity_id == amenity.id
-                '''
+            In filestorage mode will return a list of dictionaries where
+            instances contain contain amenity id linked to the place object.
+            place.amenity_id == amenity.id
+            '''
+            from models.amenity import Amenity
             amenity_list = []
-            fs = file_storage.FileStorage()
-
-            amenity_dict = fs.all(amenity.Amenity.__class__.__name__)
-            for amenity in amenity_dict:
-                if amenity.get('amenity.id') == self.amenity_id:
-                    amenity_list.append(amenity)
+            amenity_dict = models.storage.all(Amenity)
+            for amenity in amenity_dict.values():
+                try:
+                    if amenity.place_id == self.id:
+                        amenity_list.append(amenity)
+                except AttributeError:
+                    pass
             return amenity_list
 
         @amenities.setter
         def amenities(self, amenity):
+            from models.amenity import Amenity
             if amenity.__class__.__name__ == 'Amenity':
                 self.amenity_id.append(amenity.id)
             else:
