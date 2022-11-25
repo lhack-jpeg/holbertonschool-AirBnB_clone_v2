@@ -27,7 +27,7 @@ class FileStorage:
         if cls is not None:
             '''Check to see if cls exists in filestorage & add to dict.'''
             for k, v in self.__objects.items():
-                if cls == v.__class__.__name__ or v.__class__:
+                if cls == v.__class__.__name__ or cls == v.__class__:
                     cls_dict[k] = v
             return cls_dict
         else:
