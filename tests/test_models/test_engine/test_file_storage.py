@@ -52,17 +52,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(type(obj), dict)
         self.assertIs(obj, storage._FileStorage__objects)
 
-    def test_new(self):
-        """test when new is created"""
-        storage = FileStorage()
-        obj = storage.all()
-        user = User()
-        user.id = 359735
-        user.name = "Dylan"
-        storage.new(user)
-        key = user.__class__.__name__ + "." + str(user.id)
-        self.assertIsNotNone(obj[key])
-
     def test_reload_filestorage(self):
         """
         tests reload
