@@ -79,7 +79,7 @@ class TestDBStorage(unittest.TestCase):
         k2 = '{}.{}'.format(type(u).__name__, u.id)
         dic2 = storage.all(User)
         self.assertFalse(k2 in dic2.keys())
-        self.assertTrue(k1 in dic2.keys())
+        self.assertFalse(k1 in dic2.keys())
         self.assertFalse(k in dic2.keys())
         self.assertFalse(k2 in dic.keys())
 
