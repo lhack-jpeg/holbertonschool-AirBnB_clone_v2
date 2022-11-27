@@ -79,9 +79,9 @@ class TestDBStorage(unittest.TestCase):
         k2 = '{}.{}'.format(type(u).__name__, u.id)
         dic2 = storage.all(User)
         self.assertTrue(k2 in dic2.keys())
-        self.assertFalse(k1 in dic2.keys())
-        self.assertFalse(k in dic2.keys())
-        self.assertFalse(k2 in dic.keys())
+        self.assertTrue(k1 in dic2.keys())
+        self.assertTrue(k in dic2.keys())
+        self.assertTrue(k2 in dic.keys())
 
     @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db',
                      "can't run if storage is file")
