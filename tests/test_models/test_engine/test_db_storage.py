@@ -65,7 +65,7 @@ class TestDBStorage(unittest.TestCase):
         storage.save()
         k = '{}.{}'.format(type(s).__name__, s.id)
         dic = storage.all(State)
-        self.assertTrue(k in dic.keys())
+        self.assertFalse(k in dic.keys())
         s1 = State(name="NSW")
         storage.new(s1)
         storage.save()
