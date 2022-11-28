@@ -11,11 +11,13 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def index():
+    '''Returns the string below'''
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def school():
+    '''Returns the string below'''
     return 'HBNB'
 
 
