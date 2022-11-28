@@ -2,7 +2,6 @@
 """ Starts a web app using flask, listening on port 5000 """
 
 from flask import Flask
-from markupsafe import escape
 app = Flask(__name__)
 
 
@@ -21,7 +20,7 @@ def hbnb():
 @app.route("/c/<text>", strict_slashes=False)
 def c_text(text):
     """displays url text on page"""
-    return f"C {escape(text)}"
+    return f"C " + text.replace("_", " ")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
