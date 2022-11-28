@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+'''
+Script for very basic web application. Returns the string
+requested by any device on the network.
+'''
 from flask import Flask
 
 app = Flask(__name__)
