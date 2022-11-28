@@ -21,7 +21,7 @@ def school():
 
 @app.route('/c/<text>')
 def c_is(text):
-    ''' returns the string "C <text>".''''
+    ''' returns the string "C <text>".'''
     return f'C {text}'.replace('_', " ")
 
 
