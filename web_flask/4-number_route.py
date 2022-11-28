@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-'''
+"""
 Script for very basic web application. Returns the string
 requested by any device on the network depending on the phrases
 after the slash.
-'''
+"""
 from flask import Flask
 
 app = Flask(__name__)
@@ -11,32 +11,34 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def index():
+    """Returns the string below"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def school():
-    return 'HBNB'
+    """Returns the string below"""
+    return "HBNB"
 
 
-@app.route('/c/<text>')
+@app.route("/c/<text>")
 def c_is(text):
     # returns the string 'C <text>'
-    return f'C {text}'.replace('_', " ")
+    return f"C {text}".replace("_", " ")
 
 
-@app.route('/python', defaults={'text': 'is cool'})
-@app.route('/python/<text>')
+@app.route("/python", defaults={"text": "is cool"})
+@app.route("/python/<text>")
 def python_is(text):
     # returns the string 'python is...' defaults to is cool
-    return f'Python {text}'.replace('_', ' ')
+    return f"Python {text}".replace("_", " ")
 
 
-@app.route('/number/<int:n>')
+@app.route("/number/<int:n>")
 def is_n_number(n):
-    '''Prints out n is number if n is type int.'''
+    """Prints out n is number if n is type int."""
     if isinstance(n, int):
-        return f'{n} is a number'
+        return f"{n} is a number"
 
 
 if __name__ == "__main__":
