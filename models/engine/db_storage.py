@@ -66,7 +66,7 @@ class DBStorage():
             query = self.__session.query(class_dict[cls]).all()
             for row in query:
                 id = row.id
-                key = f'{row.__class__.__name__}.{id}'
+                key = row.__class__.__name__ + '.' + id
                 delattr(row, '_sa_instance_state')
                 obj_dict[key] = row
         return obj_dict
