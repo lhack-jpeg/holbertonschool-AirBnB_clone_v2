@@ -8,9 +8,9 @@
 <body>
     <H1>States</H1>
     <UL>
-        # for id, name in state_ordered_list
+        {% for id, name in state_ordered_list %}
         <LI>{{ id }} <B>{{ name }}</B></LI>
-        # endfor
+        {% endfor %}
     </UL>
 </body>
 
