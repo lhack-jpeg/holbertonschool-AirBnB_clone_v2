@@ -5,6 +5,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
 import models.engine.file_storage
+import models
 from os import getenv
 
 
@@ -35,8 +36,8 @@ class State(BaseModel, Base):
             Currently no way toi truncate list, will just be dict that is
             filtered through.
             '''
-            city_dict = models.storage.all('City')
+            city_dict = models.storage.all('City').values()
             for city in city_dict:
-                if city.get('state_id') == self.id:
+                if city.state_id == self.id:
                     city_list.append(city)
             return city_list
