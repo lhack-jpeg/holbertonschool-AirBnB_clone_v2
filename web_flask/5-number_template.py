@@ -41,12 +41,12 @@ def is_n_number(n):
         return str(n) + ' is a number'
 
 
-@app.route("/number_template/<int: n>")
+@app.route("/number_template/<int:n>")
 def n_template(n):
-    '''
+    """
     Returns a template of a html document if n is
     an integer.
-    '''
+    """
     if isinstance(n, int):
         return render_template('5-number.html', n)
 
