@@ -30,14 +30,13 @@ class State(BaseModel, Base):
             a foreign key reference.
             '''
             city_list = []
-            fs = file_storage.FileStorage()
             '''
             Use the method from filestorage to return list of cities.
             Currently no way toi truncate list, will just be dict that is
             filtered through.
             '''
-            city_dict = fs.all(City.__class__.__name__)
+            city_dict = models.storage.all(City)
             for city in city_dict:
-                if city.get('state_id') == self.id:
+                if city['state_id'] == self.id:
                     city_list.append(city)
             return city_list
