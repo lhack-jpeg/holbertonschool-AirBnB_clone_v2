@@ -24,14 +24,14 @@ def school():
 @app.route('/c/<text>')
 def c_is(text):
     ''' returns the string "C <text>".'''
-    return f'C {text}'.replace('_', " ")
+    return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python', defaults={'text': 'is cool'})
 @app.route('/python/<text>')
 def python_is(text):
     '''Returns the string "python is..." defaults to is cool.'''
-    return f'Python {text}'.replace('_', ' ')
+    return 'Python ' + text.replace('_', ' ')
 
 
 if __name__ == "__main__":

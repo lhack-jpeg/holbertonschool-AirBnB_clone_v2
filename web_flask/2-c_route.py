@@ -24,7 +24,7 @@ def school():
 @app.route('/c/<text>')
 def c_is(text):
     ''' returns the string "C <text>".'''
-    return f'C {text}'.replace('_', " ")
+    return 'C ' + text.replace('_', ' ')
 
 
 if __name__ == "__main__":

@@ -21,17 +21,17 @@ def school():
     return "HBNB"
 
 
-@app.route("/c/<text>")
+@app.route('/c/<text>')
 def c_is(text):
-    # returns the string 'C <text>'
-    return f"C {text}".replace("_", " ")
+    ''' returns the string "C <text>".'''
+    return 'C ' + text.replace('_', ' ')
 
 
-@app.route("/python", defaults={"text": "is cool"})
-@app.route("/python/<text>")
+@app.route('/python', defaults={'text': 'is cool'})
+@app.route('/python/<text>')
 def python_is(text):
-    # returns the string 'python is...' defaults to is cool
-    return f"Python {text}".replace("_", " ")
+    '''Returns the string "python is..." defaults to is cool.'''
+    return 'Python ' + text.replace('_', ' ')
 
 
 @app.route("/number/<int:n>")
