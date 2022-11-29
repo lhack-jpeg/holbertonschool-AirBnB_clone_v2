@@ -23,10 +23,10 @@ def all_state_list():
     for state in state_list:
         state_tuple = (state.id, state.name)
         state_tuple_list.append(state_tuple)
-    
+    # sorts array of tuples by the name value.
     ordered_state_list = sorted(state_tuple_list, key=itemgetter(1))
     return render_template(
-        '7-states_list.html', 
+        '7-states_list.html',
         ordered_state_list=ordered_state_list
     )
 
