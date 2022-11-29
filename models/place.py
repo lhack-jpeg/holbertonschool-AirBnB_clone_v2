@@ -65,6 +65,7 @@ class Place(BaseModel, Base):
             '''
             from models.review import Review
             review_list = []
+            # TODO change the same style as the states look up method
 
             review_dict = models.storage.all(Review)
             for review in review_dict:
@@ -81,7 +82,7 @@ class Place(BaseModel, Base):
             '''
             from models.amenity import Amenity
             amenity_list = []
-
+            # TODO change the same style as the states look up method
             amenity_dict = models.storage.all(Amenity)
             for amenity in amenity_dict:
                 if amenity['amenity.id'] == self.amenity_id:
