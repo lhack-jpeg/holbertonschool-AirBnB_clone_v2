@@ -38,7 +38,7 @@ def python_is(text):
 def is_n_number(n):
     """Prints out n is number if n is type int."""
     if isinstance(n, int):
-        return f"{n} is a number"
+        return str(n) + ' is a number'
 
 
 if __name__ == "__main__":
