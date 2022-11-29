@@ -35,7 +35,7 @@ class State(BaseModel, Base):
             Currently no way toi truncate list, will just be dict that is
             filtered through.
             '''
-            city_dict = models.storage.all(City)
+            city_dict = models.storage.all(City).values()
             for city in city_dict:
                 if city['state_id'] == self.id:
                     city_list.append(city)
