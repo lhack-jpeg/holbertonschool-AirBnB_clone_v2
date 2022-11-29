@@ -41,7 +41,7 @@ def is_n_number(n):
         return str(n) + ' is a number'
 
 
-@app.route("/number_template/<int:n>", strict_slahes=False)
+@app.route("/number_template/<int:n>", strict_slashes=False)
 def n_template(n):
     """
     Returns a template of a html document if n is
@@ -51,22 +51,17 @@ def n_template(n):
         return render_template('5-number.html', n=n)
 
 
-@app.route('/number_odd_or_even/<int: n>:', strict_slashes=False)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def n_odd_even(n):
     '''
     Display Html page if n is integer.
     H1 tag: N is even | odd.
     '''
     if isinstance(n, int):
-        if (n % 2) == 0:
-            n_even_odd = 'even'
-        else:
-            n_even_odd = 'odd'
         return render_template(
             '6-number_odd_or_even.html',
-            n=n,
-            odd_or_even=n_even_odd)
+            n=n)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port="5000", debug=True)
