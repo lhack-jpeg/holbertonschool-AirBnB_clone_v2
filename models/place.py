@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from models.review import Review
-import models.amenity
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models.engine.file_storage
@@ -58,41 +56,41 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    @property
-    def reviews(self):
-        '''
-        In filestorage mode, this will return a list of dictionaries.
-        Where the place_id in review will be equal to place.id in the
-        place obj.
-        '''
-        review_list = []
-        fs = file_storage.File_storage()
+        @property
+        def reviews(self):
+            '''
+            In filestorage mode, this will return a list of dictionaries.
+            Where the place_id in review will be equal to place.id in the
+            place obj.
+            '''
+            from models.review import Review
+            review_list = []
 
-        review_dict = fs.all(Review.__class__.__name__)
-        for review in review_dict:
-            if review.get('place.id') == self.id:
-                review_list.append(review)
-        return review_list
+            review_dict = models.storage.all(Review)
+            for review in review_dict:
+                if review['place.id'] == self.id:
+                    review_list.append(review)
+            return review_list
 
-    @property
-    def amenity(self):
-        '''
-        In filestorage mode will return a list of dictionaries where
-        instances contain contain amenity id linked to the place object.
-        place.amenity_id == amenity.id
-        '''
-        amenity_list = []
-        fs = file_storage.File_storage()
+        @property
+        def amenities(self):
+            '''
+            In filestorage mode will return a list of dictionaries where
+            instances contain contain amenity id linked to the place object.
+            place.amenity_id == amenity.id
+            '''
+            from models.amenity import Amenity
+            amenity_list = []
 
-        amenity_dict = fs.all(amenity.Amenity.__class__.__name__)
-        for amenity in amenity_dict:
-            if amenity.get('amenity.id') == self.amenity_id:
-                amenity_list.append(amenity)
-        return amenity_list
+            amenity_dict = models.storage.all(Amenity)
+            for amenity in amenity_dict:
+                if amenity['amenity.id'] == self.amenity_id:
+                    amenity_list.append(amenity)
+            return amenity_list
 
-    @amenity.setter
-    def amenity(self, amenity):
-        if amenity.__class__.__name__ == 'Amenity':
-            self.amenity_id.append(amenity.id)
-        else:
-            pass
+        @amenities.setter
+        def amenities(self, amenity):
+            if amenity.__class__.__name__ == 'Amenity':
+                self.amenity_ids.append(amenity.id)
+            else:
+                pass
