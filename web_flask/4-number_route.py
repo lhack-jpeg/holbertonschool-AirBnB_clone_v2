@@ -21,20 +21,20 @@ def school():
     return "HBNB"
 
 
-@app.route('/c/<text>')
+@app.route('/c/<text>', strict_slahes=False)
 def c_is(text):
     ''' returns the string "C <text>".'''
     return 'C ' + text.replace('_', ' ')
 
 
-@app.route('/python', defaults={'text': 'is cool'})
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>')
 def python_is(text):
     '''Returns the string "python is..." defaults to is cool.'''
     return 'Python ' + text.replace('_', ' ')
 
 
-@app.route("/number/<int:n>")
+@app.route("/number/<int:n>", strict_slahes=False)
 def is_n_number(n):
     """Prints out n is number if n is type int."""
     if isinstance(n, int):
