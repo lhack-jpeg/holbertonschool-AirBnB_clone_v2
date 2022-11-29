@@ -48,7 +48,7 @@ def n_template(n):
     an integer.
     """
     if isinstance(n, int):
-        return render_template('5-number.html', n=n)
+        return render_template('5-number.html', num=n)
 
 
 if __name__ == "__main__":
