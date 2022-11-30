@@ -34,7 +34,7 @@ def python_is(text):
     return 'Python ' + text.replace('_', ' ')
 
 
-@app.route("/number/<int:n>", strict_slahes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def is_n_number(n):
     """Prints out n is number if n is type int."""
     if isinstance(n, int):
