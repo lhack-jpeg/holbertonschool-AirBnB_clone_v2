@@ -17,7 +17,9 @@ class State(BaseModel, Base):
         cities = relationship(
             "City",
             backref="state",
-            cascade="all, delete")
+            cascade="all, delete",
+            lazy='joined',
+            order_by='City.name')
 
     # I think more needs to be added. Need to add a getter
     # for the FileStorage and I think we may have to have an if/else
