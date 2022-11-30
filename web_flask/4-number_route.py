@@ -21,9 +21,9 @@ def school():
     return "HBNB"
 
 
-@app.route('/c/<text>', strict_slahes=False)
+@app.route('/c/<text>', strict_slashes=False)
 def c_is(text):
-    ''' returns the string "C <text>".'''
+    '''Returns the string "C <text>".'''
     return 'C ' + text.replace('_', ' ')
 
 
