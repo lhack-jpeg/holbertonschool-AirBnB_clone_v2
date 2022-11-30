@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <H1>States</H1>
+    <UL>
+        {% for state_id, state_name, cities in ordered_state_list %}
+        <LI>
+            {{ state_id|e }}: <B>{{ state_name|e }}</B>
+            <UL>
+                {% for city_id, city_name in cities %}
+                <LI>
+                    {{ city_id|e }}: <B>{{ city_name|e }}</B>
+                </LI>
+                {% endfor %}
+            </UL>
+        </LI>
+        {% endfor %}
+    </UL>
+</body>
+
+</html>
