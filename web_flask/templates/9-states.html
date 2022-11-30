@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HBNB</title>
+</head>
+
+<body>
+    {% if flag eq(1) %}
+    <H1>
+        State: {state}
+    </H1>
+    <H3>Cities</H3>
+    <UL>
+        {% for id, name in city_list %}
+        <LI>
+            {{ id|e }}: <B>{{ name|e }}</B>
+        </LI>
+        {% endfor %}
+    </UL>
+    {% else %}
+    <H1>Not found!</H1>
+    {% endif %}
+</body>
+
+</html>
