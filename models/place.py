@@ -41,7 +41,8 @@ class Place(BaseModel, Base):
             'Amenity',
             secondary=place_amenity,
             back_populates='place_amenities',
-            viewonly=False
+            viewonly=False,
+            lazy='joined'
         )
     else:
         city_id = ""
@@ -65,9 +66,7 @@ class Place(BaseModel, Base):
             '''
             from models.review import Review
             review_list = []
-            # TODO change the same style as the states look up method
-
-            review_dict = models.storage.all(Review)
+            review_dict = models.storage.all('Review').values()
             for review in review_dict:
                 if review['place.id'] == self.id:
                     review_list.append(review)
@@ -82,8 +81,7 @@ class Place(BaseModel, Base):
             '''
             from models.amenity import Amenity
             amenity_list = []
-            # TODO change the same style as the states look up method
-            amenity_dict = models.storage.all(Amenity)
+            amenity_dict = models.storage.all('Amenity').values()
             for amenity in amenity_dict:
                 if amenity['amenity.id'] == self.amenity_id:
                     amenity_list.append(amenity)
