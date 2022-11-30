@@ -42,11 +42,11 @@ def all_state_city():
     state_tuple_list = []
     for state in state_list:
         city_tuple_list = []
-        for city in state.city:
+        for city in state.cities:
             city_tuple = (city.id, city.name)
             city_tuple_list.append(city_tuple)
         state_tuple = (state.id, state.name, city_tuple_list)
-        state_tuple_list.append(state_list)
+        state_tuple_list.append(state_tuple)
     ordered_state_list = sorted(state_tuple_list, key=itemgetter(1))
     return render_template(
         '8-cities_by_states.html',
