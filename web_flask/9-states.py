@@ -15,7 +15,7 @@ def teardown_db(exception):
     storage.close()
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/states', strict_slashes=False)
 def all_state_list():
     '''Gets all states in the area.'''
     state_list = storage.all('State').values()
@@ -80,4 +80,4 @@ def state_by_id(id):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port="5000", debug=True)
